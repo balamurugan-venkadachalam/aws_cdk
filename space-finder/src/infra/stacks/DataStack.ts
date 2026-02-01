@@ -13,8 +13,8 @@ export class DataStack extends cdk.Stack {
 
         const stackSuffix = getSuffixFromStack(this);
 
-        this.spaceTable = new Table(this, 'SpaceTable', {
-            partitionKey: { name: 'spaceId', type: AttributeType.STRING },
+        this.spaceTable = new Table(this, 'SpaceDynamoTable', {
+            partitionKey: { name: 'id', type: AttributeType.STRING },
             tableName: `space-finder-${stackSuffix}`,
             billingMode: BillingMode.PAY_PER_REQUEST,
         });

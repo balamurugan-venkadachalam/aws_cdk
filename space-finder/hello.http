@@ -1,2 +1,13 @@
 
-GET https://y34p3jvue5.execute-api.us-east-1.amazonaws.com/prod/hello
+GET https://oeuos820f0.execute-api.us-east-1.amazonaws.com/prod/spaces
+###
+
+
+POST https://oeuos820f0.execute-api.us-east-1.amazonaws.com/prod/spaces
+content-type: application/json
+
+ {
+      "location": "Test Location",
+      "capacity": 10
+ }
+ ###
