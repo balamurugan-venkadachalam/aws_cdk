@@ -5,11 +5,16 @@ import {Function as LamdaFunction, Runtime, Code} from 'aws-cdk-lib/aws-lambda'
 import { Fn } from 'aws-cdk-lib/core';
 // import * as sqs from 'aws-cdk-lib/aws-sqs'; 
 
+interface PhotosHanderStackProps extends cdk.StackProps {
+  targetBucketArn: string
+}
+
+
 export class PhotosHandlerStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props: PhotosHanderStackProps) {
     super(scope, id, props);
 
-    const targetBucket = Fn.importValue('photos-bucket');
+    //const targetBucket = Fn.importValue('photos-bucket');
 
     new LamdaFunction(this, 'PhotosHandler', {
       runtime: Runtime.NODEJS_22_X,
@@ -20,10 +25,10 @@ export class PhotosHandlerStack extends cdk.Stack {
         }
       `),
       environment: {
-        TARGET_BUCKET: targetBucket
+        TARGET_BUCKET: props.targetBucketArn
       }
 
-    });
+    }); 
 
   }
 }

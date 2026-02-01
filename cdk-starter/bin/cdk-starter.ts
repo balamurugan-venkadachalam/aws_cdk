@@ -3,6 +3,7 @@ import * as cdk from 'aws-cdk-lib/core';
 import { CdkBucketStack } from '../lib/cdk-bucket-stack';
 import { PhotosStack } from '../lib/PhotosStack';
 import { PhotosHandlerStack } from '../lib/PhotosHandlerStack';
+import { PhotosUploaderStack } from '../lib/PhotosUploaderStack';
 
 const app = new cdk.App();
 new CdkBucketStack(app, 'CdkBucketStack', {
@@ -21,5 +22,9 @@ new CdkBucketStack(app, 'CdkBucketStack', {
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
 
-new PhotosStack(app, 'PhotosStack', {});
-new PhotosHandlerStack(app, 'PhotosHandlerStack');
+// const photosStack = new PhotosStack(app, 'PhotosStack', {});
+// new PhotosHandlerStack(app, 'PhotosHandlerStack', {
+//   targetBucketArn: photosStack.photosBucketArn
+// });
+
+new PhotosUploaderStack(app, 'PhotosUploaderStack', {});
