@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib/core';
-import { CdkStarterStack } from '../lib/cdk-starter-stack';
+import { CdkBucketStack } from '../lib/cdk-bucket-stack';
+import { PhotosStack } from '../lib/PhotosStack';
+import { PhotosHandlerStack } from '../lib/PhotosHandlerStack';
 
 const app = new cdk.App();
-new CdkStarterStack(app, 'CdkStarterStack', {
+new CdkBucketStack(app, 'CdkBucketStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
@@ -18,3 +20,6 @@ new CdkStarterStack(app, 'CdkStarterStack', {
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
+
+new PhotosStack(app, 'PhotosStack', {});
+new PhotosHandlerStack(app, 'PhotosHandlerStack');

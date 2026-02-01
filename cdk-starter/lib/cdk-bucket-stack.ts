@@ -18,9 +18,18 @@ class L3Bucket extends Construct {
   }
 }
 
-export class CdkStarterStack extends cdk.Stack {
+export class CdkBucketStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
+
+        
+    const durationInDays = new cdk.CfnParameter(this, 'durationInDays', {
+      type: 'Number',
+      default: 6,
+      minValue: 1,
+      maxValue: 10,
+      description: 'Number of days to expire objects in the bucket',
+    });
 
     // The code that defines your stack goes here
 
@@ -34,7 +43,7 @@ export class CdkStarterStack extends cdk.Stack {
     const bucket = new Bucket(this, 'MyL2BucketBalam122', {
       lifecycleRules: [
         {
-          expiration: cdk.Duration.days(365),
+          expiration: cdk.Duration.days(durationInDays.valueAsNumber),
         },
       ],
     });
@@ -50,12 +59,22 @@ export class CdkStarterStack extends cdk.Stack {
 
     });
 
+
+
+
     //L3 construct
     const bucketL3 = new L3Bucket(this, 'MyL3BucketBalam123', 365);
-
     
-
-   
-
+    new cdk.CfnOutput(this, 'CFNOutputL2BucketName', {
+      value: bucket.bucketName,
+    });
+    new cdk.CfnOutput(this, 'CFNOutputL1BucketName', {
+      value: bucketL1.bucketName || '',
+    });
+    new cdk.CfnOutput(this, 'CFNOutputL3BucketName', {
+      value: bucket.bucketName,
+    });
+  
   }
 }
+
