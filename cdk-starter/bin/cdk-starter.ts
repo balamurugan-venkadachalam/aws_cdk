@@ -4,6 +4,7 @@ import { CdkBucketStack } from '../lib/cdk-bucket-stack';
 import { PhotosStack } from '../lib/PhotosStack';
 import { PhotosHandlerStack } from '../lib/PhotosHandlerStack';
 import { PhotosUploaderStack } from '../lib/PhotosUploaderStack';
+import { Tagger } from './Tagger';
 
 const app = new cdk.App();
 new CdkBucketStack(app, 'CdkBucketStack', {
@@ -28,3 +29,6 @@ new CdkBucketStack(app, 'CdkBucketStack', {
 // });
 
 new PhotosUploaderStack(app, 'PhotosUploaderStack', {});
+
+const tagger = new Tagger('Owner', 'Balamurugan');
+cdk.Aspects.of(app).add(tagger);
