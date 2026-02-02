@@ -1,13 +1,34 @@
 
-GET https://oeuos820f0.execute-api.us-east-1.amazonaws.com/prod/spaces
+GET https://zs6oclo452.execute-api.us-east-1.amazonaws.com/prod/spaces
 ###
 
 
-POST https://oeuos820f0.execute-api.us-east-1.amazonaws.com/prod/spaces
+POST https://zs6oclo452.execute-api.us-east-1.amazonaws.com/prod/spaces
 content-type: application/json
 
  {
-      "location": "Test Location",
-      "capacity": 10
+      "capacity": 121
  }
  ###
+
+###
+ PUT https://zs6oclo452.execute-api.us-east-1.amazonaws.com/prod/spaces
+content-type: application/json
+
+ {
+      "location": "Test Location1",
+      "capacity": 121
+ }
+ ###
+
+###
+
+ POST https://zs6oclo452.execute-api.us-east-1.amazonaws.com/prod/spaces
+content-type: application/json
+###
+
+###
+POST https://zs6oclo452.execute-api.us-east-1.amazonaws.com/prod/spaces
+content-type: application/json
+ 
+{invalid json syntax here

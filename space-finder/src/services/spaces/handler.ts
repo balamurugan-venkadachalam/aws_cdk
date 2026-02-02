@@ -1,9 +1,10 @@
+import { captureAWSv3Client } from "aws-xray-sdk-core";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from "aws-lambda";
-import { postSpaces } from "./PostSpaces";
+import { postDocumentClientSpaces } from "./PostSpaces";
 import { getSpaces } from "./GetSpaces";
 
-const ddbClient = new DynamoDBClient({});
+const ddbClient = captureAWSv3Client(new DynamoDBClient({}));
 
 async function handler(event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> {
 
@@ -14,7 +15,7 @@ async function handler(event: APIGatewayProxyEvent, context: Context): Promise<A
                 return getSpaces(event, ddbClient);
                 break;
             case 'POST':
-                return postSpaces(event, ddbClient);
+                return postDocumentClientSpaces(event, ddbClient);
             default:
                 return {
                     statusCode: 400,
@@ -24,8 +25,10 @@ async function handler(event: APIGatewayProxyEvent, context: Context): Promise<A
     } catch (error) {
         console.error(error);
         return {
-            statusCode: 500,
-            body: JSON.stringify(error.message)
+        statusCode: 500,
+            body: JSON.stringify({ 
+                message: error instanceof Error ? error.message : 'Internal server error'
+            })  
         }
     }
 

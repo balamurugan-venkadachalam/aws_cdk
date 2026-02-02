@@ -16,7 +16,8 @@
                 "ts-node/register"
             ],
             "args": [
-            "${workspaceFolder}/test/launcher.ts"
+            //"${workspaceFolder}/test/launcher.ts"
+            "${relativeFile}"
             ],
             // "env": {
             //     "AWS_REGION": "us-east-1",

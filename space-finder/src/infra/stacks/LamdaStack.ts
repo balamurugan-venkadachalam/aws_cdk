@@ -7,6 +7,7 @@ import { Table } from 'aws-cdk-lib/aws-dynamodb';
 import { LambdaIntegration } from 'aws-cdk-lib/aws-apigateway';
 import { Runtime } from 'aws-cdk-lib/aws-lambda';
 import { PolicyStatement, Effect } from 'aws-cdk-lib/aws-iam';
+import { Tracing } from 'aws-cdk-lib/aws-lambda';
 
 interface LamdaStackProps extends cdk.StackProps {
     spaceTable: Table;
@@ -26,6 +27,8 @@ export class LamdaStack extends cdk.Stack {
             environment: {
                 SPACE_TABLE_NAME: props.spaceTable.tableName,
         },
+        tracing: Tracing.ACTIVE,
+        timeout: cdk.Duration.seconds(40),
         });
 
         helloLambda.addToRolePolicy(new PolicyStatement({

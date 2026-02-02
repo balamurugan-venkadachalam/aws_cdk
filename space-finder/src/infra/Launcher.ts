@@ -5,6 +5,7 @@ import { SpacesLambdaStack } from "./stacks/SpacesLambdaStack";
 import { APIGatewayStack } from "./stacks/APIGatewayStack"; 
 import { ApiStack } from "./stacks/ApiStack";
 import { LamdaStack } from "./stacks/LamdaStack";
+import { MonitorStack } from "./stacks/MonitorStack";
 
 const app = new cdk.App();
 
@@ -24,3 +25,5 @@ const spacesLambdaStack = new SpacesLambdaStack(app, 'SpacesLambdaStack', {
 new ApiStack(app, 'ApiStack', {
     spacesLambdaIntegration: spacesLambdaStack.spacesLambdaIntegration
 })
+
+new MonitorStack(app, 'MonitorStack')
